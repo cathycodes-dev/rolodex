@@ -6,7 +6,7 @@ terraform {
     }
   }
   backend "s3" {
-    bucket       = var.repo_bucket
+    bucket       = local.repo_bucket
     key          = "infrastructure/terraform.tfstate"
     region       = var.region
     use_lockfile = true
@@ -16,7 +16,7 @@ terraform {
 }
 
 provider "aws" {
-  region = var.region
+  region = "${var.region}"
 
   default_tags {
     tags = {
