@@ -74,11 +74,21 @@ jobs:
           echo '```' >> $GITHUB_STEP_SUMMARY
           echo "</details>" >> $GITHUB_STEP_SUMMARY
 
-
       - name: Terraform apply
         id: apply
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: terraform apply -auto-approve -input=false
+        run: |
+          terraform apply -auto-approve -input=false
+          # Capture the output and save it to GitHub Actions state
+          echo "REPO_BUCKET=$(terraform output -raw repo_bucket)" >> $GITHUB_OUTPUT
+
         working-directory: ${{ env.working-directory }}
         env:
           TF_VAR_assume_role: "GitHubAction-AssumeRoleWithAction"
+
+      - name: Deploy Site to S3
+        run: |
+          # Access the variables from the 'apply' step
+          aws s3 sync ./ s3://${{ steps.apply.outputs.REPO_BUCKET }}/git-hub/ --delete 
+
+      
