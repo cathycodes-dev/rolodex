@@ -5,11 +5,19 @@ terraform {
       version = "~> 6.0"
     }
   }
+  backend "s3" {
+    bucket       = var.repo_bucket
+    key          = "infrastructure/terraform.tfstate"
+    region       = var.region
+    use_lockfile = true
+    encrypt      = true
+  }
+  required_version = ">= 1.10"
 }
 
 provider "aws" {
-  region = "${var.region}"
-  
+  region = var.region
+
   default_tags {
     tags = {
       Owner       = "${var.owner}"
@@ -20,6 +28,5 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "project_resources" {
-  bucket = "${var.project_name}-${var.environment}-repo" 
-
+  bucket = var.repo_bucket
 }
