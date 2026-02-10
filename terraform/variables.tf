@@ -27,8 +27,6 @@ variable "environment" {
 }
 
 
-variable "repo_bucket" {
-    type = string 
-    description = "S3 Bucket to contain project repositry & infrastructure files"
-    default =  "${var.project_name}-${var.environment}-repo" 
+locals {
+    repo_bucket =  "${var.project_name}-${var.environment}-repo" 
 }

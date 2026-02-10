@@ -28,5 +28,5 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "project_resources" {
-  bucket = var.repo_bucket
+  bucket = local.repo_bucket
 }
