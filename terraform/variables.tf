@@ -1,6 +1,6 @@
 variable "owner" {
   type    = string
-  default = "Cathy-Codes-Dev"
+  default = "Cathy-Codes"
 }
 
 variable "project_name" {

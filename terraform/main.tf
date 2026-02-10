@@ -20,6 +20,6 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "project_resources" {
-  bucket = "${var.project_name}-${var.environment}" 
+  bucket = "${var.project_name}-${var.environment}-repo" 
 
 }
