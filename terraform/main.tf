@@ -5,18 +5,10 @@ terraform {
       version = "~> 6.0"
     }
   }
-  backend "s3" {
-    bucket       = "${local.repo_bucket}"
-    key          = "infrastructure/terraform.tfstate"
-    region       = "${var.region}"
-    use_lockfile = true
-    encrypt      = true
-  }
-  required_version = ">= 1.10"
 }
 
 provider "aws" {
-  region = "${var.region}"
+  region = var.region
 
   default_tags {
     tags = {
