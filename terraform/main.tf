@@ -5,6 +5,14 @@ terraform {
       version = "~> 6.0"
     }
   }
+  backend "s3" {
+    bucket       = "cathycodes-terraform-state"
+    key          = "rolodex/terraform.tfstate"
+    region       = "us-east-1"
+    use_lockfile = true
+    encrypt      = true
+  }
+  required_version = ">= 1.10"
 }
 
 provider "aws" {
@@ -17,6 +25,7 @@ provider "aws" {
       Environment = "${var.environment}"
     }
   }
+
 }
 
 resource "aws_s3_bucket" "project_resources" {
