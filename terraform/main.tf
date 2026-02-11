@@ -6,9 +6,9 @@ terraform {
     }
   }
   backend "s3" {
-    bucket       = local.repo_bucket
+    bucket       = "${local.repo_bucket}"
     key          = "infrastructure/terraform.tfstate"
-    region       = var.region
+    region       = "${var.region}"
     use_lockfile = true
     encrypt      = true
   }
