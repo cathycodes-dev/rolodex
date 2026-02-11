@@ -85,10 +85,3 @@ jobs:
         working-directory: ${{ env.working-directory }}
         env:
           TF_VAR_assume_role: "GitHubAction-AssumeRoleWithAction"
-
-      - name: Deploy Site to S3
-        run: |
-          # Access the variables from the 'apply' step
-          aws s3 sync ./ s3://${{ steps.apply.outputs.REPO_BUCKET }}/git-hub/ --delete 
-
-      
