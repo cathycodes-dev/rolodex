@@ -1,7 +1,7 @@
 data "archive_file" "lambda_zip" {
   type        = "zip"
-  source_file  = "${path.module}/src/index.py"
-  output_path = "${path.module}/src/rolodex_report_lambda.zip"
+  source_file  = "${path.root}/../src/index.py"
+  output_path = "${path.module}/rolodex_report_lambda.zip"
 }
 
 resource "aws_s3_object" "lambda_code" {
