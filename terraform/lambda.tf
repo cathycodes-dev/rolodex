@@ -1,6 +1,6 @@
 data "archive_file" "lambda_zip" {
   type        = "zip"
-  source_dir  = "${path.module}/src/"
+  source_file  = "${path.module}/src/index.py"
   output_path = "${path.module}/src/rolodex_report_lambda.zip"
 }
 
