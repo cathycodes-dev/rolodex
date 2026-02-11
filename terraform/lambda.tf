@@ -1,12 +1,12 @@
 data "archive_file" "lambda_zip" {
   type        = "zip"
   source_file  = "${path.root}/../src/index.py"
-  output_path = "/rolodex_report_lambda.zip"
+  output_path = "${path.module}/rolodex_report_lambda.zip"
 }
 
 resource "aws_s3_object" "lambda_code" {
   bucket      = aws_s3_bucket.project_resources.id
-  key         = "/rolodex_report_lambda.zip"
+  key         = "src/rolodex_report_lambda.zip"
   source      = data.archive_file.lambda_zip.output_path
   source_hash = data.archive_file.lambda_zip.output_base64sha256
 }
